@@ -12,7 +12,12 @@ public class HelloWorldRoute extends RouteBuilder {
     public void configure() throws Exception {
 
         from("timer://myTimer?period=30000")
-		.id("fileWriterRoute").log(LoggingLevel.INFO, "File wroiter route");
+		.id("myTimerRoute").log(LoggingLevel.INFO, "Timer .... tick tock..... tick tock");
+        
+        from("direct:helloWorld")
+        .id("helloWorld")
+        .transform(constant("Hello World"))
+        .log("body is: ${body}");
 
     }
 
